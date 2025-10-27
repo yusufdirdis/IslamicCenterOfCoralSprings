@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+
+</head>
+
+<body>
+
+  <nav class="navbar-one flex">
+    <div class="left flex">
+      <div class="email">
+        <i class="fa fa-envelope"></i>
+        <span> info@iccsfl.com</span>
+      </div>
+      <div class="call">
+        <i class="fa fa-phone"></i>
+        <span> (954) 529-7146</span>
+      </div>
+    </div>
+    <div class="right flex">
+      <i class="fab fa-facebook"></i>
+      <a href="https://www.facebook.com/iccsfl" target="_blank">Facebook</a>
+    </div>
+  </nav>
+
+  <nav class="navbar-two flex" id="main-nav">
+
+    <div class="logo">
+      <img src="logo.png" alt="ICCS Logo" class="logo-image">
+      <p>Islamic Center of Coral Springs</p>
+    </div>
+    <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-navigation">
+      <i class="fa fa-bars"></i>
+    </button>
+    <ul class="flex nav-links" id="primary-navigation">
+      <li><a href="#">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="#">Contact</a></li>
+      <li class="hide-desktop"><a href="#" onclick="window.location.href='donatepage.html'">Donate</a></li>
+    </ul>
+    <div class="donate-nav-button">
+      <a href="#" onclick="window.location.href='donatepage.html'">Donate</a>
+    </div>
+  </nav>
+
+  <section class="text-section">
+    <div class="hero-container">
+      <div class="hero-welcome">WELCOME TO</div>
+      <hr class="hero-divider">
+      <div class="hero-title">ISLAMIC CENTER OF CORAL SPRINGS</div>
+      <div class="date-widget" aria-live="polite">
+        <div class="date-line" id="gregorian-date">Loading date…</div>
+        <div class="date-line" id="hijri-date"></div>
+      </div>
+    
+
+      
+      <section id="prayer-times" class="prayer-section">
+        <div class="prayer-times-table-wrapper">
+          <table class="prayer-times-table">
+            <thead>
+              <h2 class="prayer-title">Prayer Times</h2>
+              <tr>
+                <th>Salah</th>
+                <th>Athan</th>
+                <th>Iqama</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Fajr</td>
+                <td><span id="Fajr">--:--</span></td>
+                <td>6:25</td>
+              </tr>
+              <tr>
+                <td>Zuhr</td>
+                <td><span id="Zuhr">--:--</span></td>
+                <td>1:45</td>
+              </tr>
+              <tr>
+                <td>Asr</td>
+                <td><span id="Asr">--:--</span></td>
+                <td>5:15</td>
+              </tr>
+              <tr>
+                <td>Magrib</td>
+                <td><span id="Magrib">--:--</span></td>
+                <td>7:08</td>
+              </tr>
+              <tr>
+                <td>Isha</td>
+                <td><span id="Isha">--:--</span></td>
+                <td>8:30</td>
+              </tr>
+
+            </tbody>
+          </table>
+          <p class="friday-prayer-info">Friday Jummah is at 1:30 PM</p>
+        </div>
+
+      </section>
+   
+      
+      <img src="flyer.JPG" alt="iccs-flyer" class="flyer-image" style="max-width: 550px; width: 100%; margin-top: 32px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); height: auto;">
+      
+         <footer class="footer">
+        <img src="logo.png" alt="ICCS Logo" class="footer-logo"> <p>11050 Wiles Rd, Coral Springs, FL 33076
+        </p>
+        <p>&copy; 2025 Islamic Center of Coral Springs. All rights reserved.</p>
+      </footer>
+
+      </section>
+    </section>
+      
+
+  
+  
+
+  <script>
+    // Mobile nav toggle
+    (function(){
+      var nav = document.getElementById('main-nav');
+      var toggle = document.querySelector('.menu-toggle');
+      if (toggle && nav) {
+        toggle.addEventListener('click', function(){
+          var isOpen = nav.classList.toggle('is-open');
+          toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+      }
+    })();
+
+    (async function () {
+      // ====== YOUR SETTINGS ======
+      const CITY = "Coral Springs";
+      const STATE = "FL";
+      const COUNTRY = "US";
+      const METHOD = 2;   // ISNA
+      const SCHOOL = 0;   // Shafi
+      const LAT_ADJ = 3;   // Angle-Based
+      // Tune order: Imsak,Fajr,Sunrise,Dhuhr,Asr,Sunset,Maghrib,Isha,Midnight
+      const TUNE = "0,1,0,1,1,1,0,2,0";  // Fajr +1, Maghrib +2
+
+      // Helper: convert "13:13" → "1:13 PM"
+      function to12Hour(timeStr) {
+        if (!timeStr) return "--:--";
+        let [h, m] = timeStr.split(":").map(Number);
+        const ampm = h >= 12 ? "PM" : "AM";
+        h = h % 12 || 12; // convert 0 → 12, 13 → 1
+        return `${h}:${m.toString().padStart(2, '0')} ${ampm}`;
+      }
+
+      // Build today's API URL
+      const now = new Date();
+      // Immediately set Gregorian date so UI isn't stuck on "Loading"
+      try {
+        var gregElInit = document.getElementById('gregorian-date');
+        if (gregElInit) {
+          var gregFormatterInit = new Intl.DateTimeFormat('en-US', {
+            weekday: 'long', year: 'numeric', month: 'short', day: 'numeric'
+          });
+          gregElInit.textContent = gregFormatterInit.format(now);
+        }
+      } catch (e) {
+        var gregElInitFallback = document.getElementById('gregorian-date');
+        if (gregElInitFallback) gregElInitFallback.textContent = now.toDateString();
+      }
+      const dd = String(now.getDate()).padStart(2, '0');
+      const mm = String(now.getMonth() + 1).padStart(2, '0');
+      const yyyy = now.getFullYear();
+      const today = `${dd}-${mm}-${yyyy}`;
+
+      const url = `https://api.aladhan.com/v1/timingsByCity/${today}` +
+        `?city=${encodeURIComponent(CITY)}` +
+        `&state=${encodeURIComponent(STATE)}` +
+        `&country=${encodeURIComponent(COUNTRY)}` +
+        `&method=${METHOD}&school=${SCHOOL}` +
+        `&latitudeAdjustmentMethod=${LAT_ADJ}` +
+        `&tune=${TUNE}`;
+
+      try {
+        const res = await fetch(url, { cache: "no-store" });
+        const json = await res.json();
+        if (json.code !== 200) throw new Error(json.status || "API error");
+
+        const t = json.data.timings;
+        const d = json.data.date;
+
+        // Map Aladhan keys → your table span IDs
+        const map = {
+          Fajr: ["Fajr"],
+          Dhuhr: ["Zuhr"],       // your table uses "Zuhr"
+          Asr: ["Asr"],
+          Maghrib: ["Magrib"],   // your table uses "Magrib"
+          Isha: ["Isha"]
+        };
+
+        for (const key in map) {
+          const val = (t[key] || "").replace(/\s*\(EDT\)|\s*\(EST\)/g, "");
+          for (const id of map[key]) {
+            const el = document.getElementById(id);
+            if (el) el.textContent = to12Hour(val);
+          }
+        }
+
+        // Populate dates
+        var gregEl = document.getElementById('gregorian-date');
+        var hijriEl = document.getElementById('hijri-date');
+        if (d) {
+          // Keep Gregorian as already set; only update if empty
+          if (gregEl && (!gregEl.textContent || /Loading/i.test(gregEl.textContent))) {
+            gregEl.textContent = d.readable || gregEl.textContent;
+          }
+
+          if (hijriEl) {
+            // Hijri: e.g., 27 Rabi Al-Awwal 1447 AH
+            var h = d.hijri || {};
+            var hijriDay = h.day || '';
+            var hijriMonth = (h.month && (h.month.en || h.month.number)) || '';
+            var hijriYear = h.year || '';
+            var hijriSuffix = h.designation && h.designation.abbreviated ? (' ' + h.designation.abbreviated) : ' AH';
+            var hijriText = [hijriDay, hijriMonth, hijriYear].filter(Boolean).join(' ') + hijriSuffix;
+            hijriEl.textContent = hijriText.trim();
+          }
+        }
+
+        console.log("Aladhan URL used:", url);
+      } catch (e) {
+        console.error("Unable to load prayer times:", e);
+        // Ensure Gregorian still shows a sensible value even if API fails
+        var gregElErr = document.getElementById('gregorian-date');
+        if (gregElErr && (!gregElErr.textContent || /Loading/i.test(gregElErr.textContent))) {
+          gregElErr.textContent = now.toDateString();
+        }
+      }
+    })();
+  </script>
+
+
+</body>
+
+</html>
