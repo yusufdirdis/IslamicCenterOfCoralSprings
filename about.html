@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About ICCS</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <nav class="navbar-one flex">
+    <div class="left flex">
+      <div class="email">
+        <i class="fa fa-envelope"></i>
+        <span> info@iccsfl.com</span>
+      </div>
+      <div class="call">
+        <i class="fa fa-phone"></i>
+        <span> (954) 529-7146</span>
+      </div>
+    </div>
+    <div class="right flex">
+      <i class="fab fa-facebook"></i>
+      <a href="https://www.facebook.com/iccsfl" target="_blank">Facebook</a>
+    </div>
+  </nav>
+
+  <nav class="navbar-two flex" id="main-nav">
+    <div class="logo">
+      <img src="logo.png" alt="ICCS Logo" class="logo-image">
+      <p class="logo-text">Islamic Center of Coral Springs</p>
+    </div>
+    <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-navigation">
+      <i class="fa fa-bars"></i>
+    </button>
+    <ul class="flex nav-links" id="primary-navigation">
+      <li><a href="text.html">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+      <li class="hide-desktop"><a href="#" onclick="window.location.href='donatepage.html'">Donate</a></li>
+    </ul>
+    <div class="donate-nav-button">
+      <a href="#" onclick="window.location.href='donatepage.html'">Donate</a>
+    </div>
+  </nav>
+
+  <section class="text-section">
+    <div class="hero-container">
+      <div class="hero-welcome">LEARN ABOUT</div>
+      <hr class="hero-divider">
+      <div class="hero-title">ISLAMIC CENTER OF CORAL SPRINGS</div>
+      
+      <div class="about-content-wrapper">
+        <div class="arabic-text-left">
+          <span class="arabic-text">مُحَمَّدٌ رَسُولُ ٱللَّٰهِ</span>
+        </div>
+        
+        <section class="donation-section" style="max-width: 500px; text-align: center;">
+          <p style="margin-top: 10px;" >
+          The Islamic Center of Coral Springs (ICCS) has been serving the Muslim community in Coral Springs and surrounding
+          areas since 2012, with a mission to provide a welcoming, spiritually nurturing, and educational environment for
+          Muslims and non-Muslims alike. Located at 11050 Wiles Road, Suite 104, Coral Springs, FL, ICCS offers daily
+          prayers, Friday Jumu'ah Prayer, Qur'an classes, Islamic lectures, community outreach, and interfaith dialogue.
+          Now expanding, ICCS relies on the generosity and dedication of volunteers and donors to maintain its facilities
+          and programs.
+        </p>
+        <br>
+        <p>
+          ICCS is more than just a mosque — it is a community for unity, spiritual growth, learning, and service. The center
+          strives to foster an inclusive atmosphere where Muslims of diverse backgrounds feel at home, and where the broader
+          public is invited to learn about Islam. Through educational programs, social activities, and charitable
+          initiatives, ICCS aims to be a positive force in Broward County, promoting compassion, justice, and understanding.
+        </p>
+        </section>
+        
+        <div class="arabic-text-right">
+          <span class="arabic-text">لَا إِلَٰهَ إِلَّا ٱللَّٰهُ</span>
+        </div>
+      </div>
+      
+      <footer class="footer">
+        <img src="logo.png" alt="ICCS Logo" class="footer-logo">
+        <p>11050 Wiles Rd, Coral Springs, FL 33076</p>
+        <p>&copy; 2025 Islamic Center of Coral Springs. All rights reserved.</p>
+      </footer>
+    </div>
+  </section>
+
+  <script>
+    // Mobile nav toggle
+    (function(){
+      var nav = document.getElementById('main-nav');
+      var toggle = document.querySelector('.menu-toggle');
+      if (toggle && nav) {
+        toggle.addEventListener('click', function(){
+          var isOpen = nav.classList.toggle('is-open');
+          toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+      }
+    })();
+  </script>
+</body>
+
+</html>
+
+
