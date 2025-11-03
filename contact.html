@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Islamic Center of Coral Springs</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Islamic-inspired animated background */
+    .text-section {
+      background-image: none !important;
+      background-color: #000814 !important;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* Animated gradient background */
+    .text-section::before {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: -100%;
+      width: 300%;
+      height: 300%;
+      background: linear-gradient(
+        -45deg,
+        #001a4d 0%,
+        #0d1b2a 15%,
+        #1b263b 25%,
+        #0d47a1 40%,
+        #1565c0 55%,
+        #0d1b2a 70%,
+        #001a4d 85%,
+        #000000 100%
+      );
+      animation: gradientShift 20s ease-in-out infinite;
+      z-index: 1;
+    }
+    
+    /* Islamic geometric pattern overlay */
+    .text-section::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        repeating-linear-gradient(45deg, transparent, transparent 50px, rgba(82, 123, 235, 0.02) 50px, rgba(82, 123, 235, 0.02) 52px),
+        repeating-linear-gradient(-45deg, transparent, transparent 50px, rgba(82, 123, 235, 0.04) 50px, rgba(82, 123, 235, 0.04) 52px),
+        radial-gradient(circle at 20% 30%, rgba(21, 101, 192, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(13, 71, 161, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 100%, rgba(13, 71, 161, 0.1) 0%, transparent 60%);
+      animation: patternFloat 25s ease-in-out infinite;
+      z-index: 2;
+      pointer-events: none;
+    }
+    
+    /* Animations */
+    @keyframes gradientShift {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      25% {
+        transform: translate(-15%, -15%) rotate(10deg);
+      }
+      50% {
+        transform: translate(-25%, -10%) rotate(15deg);
+      }
+      75% {
+        transform: translate(-15%, -20%) rotate(8deg);
+      }
+      100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+    }
+    
+    @keyframes patternFloat {
+      0%, 100% {
+        transform: translateY(0) scale(1) rotate(0deg);
+        opacity: 1;
+      }
+      33% {
+        transform: translateY(-30px) scale(1.08) rotate(2deg);
+        opacity: 0.9;
+      }
+      66% {
+        transform: translateY(-15px) scale(1.05) rotate(-2deg);
+        opacity: 0.95;
+      }
+    }
+    
+    /* Scroll-based animation effect */
+    @media (prefers-reduced-motion: no-preference) {
+      .text-section {
+        animation: backgroundScroll 1s ease-out;
+      }
+    }
+    
+    @keyframes backgroundScroll {
+      from {
+        background-position: 0 -50px;
+      }
+      to {
+        background-position: 0 0;
+      }
+    }
+    
+    /* Ensure content stays above animated backgrounds */
+    .text-section > * {
+      position: relative;
+      z-index: 3;
+    }
+
+    /* Contact page specific styles */
+    .text-section {
+      min-height: auto !important;
+      padding-bottom: 0 !important;
+    }
+
+    .contact-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px 40px 20px;
+      margin-bottom: 0;
+    }
+
+    .hero-welcome {
+      font-family: 'Merriweather', Georgia, 'Times New Roman', serif;
+      font-size: 2.5em;
+      font-weight: 700;
+      margin: 0 0 15px 0;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .hero-divider {
+      width: 60%;
+      margin: 0 auto 25px auto;
+      border: none;
+      border-top: 3px solid #fff;
+      opacity: 0.65;
+    }
+
+    .hero-title {
+      font-family: 'Merriweather', Georgia, 'Times New Roman', serif;
+      font-size: 2.75em;
+      font-weight: 900;
+      margin: 0 0 38px 0;
+      letter-spacing: 2px;
+      text-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+      text-transform: uppercase;
+      text-align: center;
+      color: #fff;
+    }
+
+    .contact-subtitle {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.2rem;
+      margin-bottom: 50px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .contact-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      padding: 50px 40px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .contact-icon {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, rgb(3, 30, 104), rgb(82, 123, 235));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 30px;
+      box-shadow: 0 4px 20px rgba(3, 30, 104, 0.3);
+    }
+
+    .contact-icon i {
+      font-size: 45px;
+      color: white;
+    }
+
+    .contact-name {
+      font-size: 2rem;
+      font-weight: bold;
+      color: rgb(3, 30, 104);
+      margin-bottom: 10px;
+    }
+
+    .contact-title-text {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    .contact-details {
+      margin-top: 20px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 15px 0;
+      font-size: 1.1rem;
+      color: #333;
+    }
+
+    .contact-item i {
+      font-size: 1.3rem;
+      color: rgb(82, 123, 235);
+      margin-right: 12px;
+      width: 25px;
+    }
+
+    .contact-item a {
+      color: #333;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .contact-item a:hover {
+      color: rgb(3, 30, 104);
+    }
+
+    .general-info {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      padding: 40px;
+      margin-top: 50px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .general-info h3 {
+      font-size: 1.8rem;
+      color: rgb(3, 30, 104);
+      margin-bottom: 20px;
+    }
+
+    .general-info p {
+      font-size: 1.1rem;
+      color: #333;
+      margin: 10px 0;
+    }
+
+    .general-info a {
+      color: rgb(82, 123, 235);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .general-info a:hover {
+      color: rgb(3, 30, 104);
+    }
+
+    /* Footer override for contact page */
+    .footer {
+      position: relative !important;
+      bottom: 0 !important;
+      margin-top: 60px !important;
+    }
+
+    /* Modern Donate Button Styling */
+      .donate-nav-button a {
+        background: linear-gradient(135deg, #1565c0, #0d47a1) !important;
+        color: white !important;
+        padding: 12px 30px !important;
+        border-radius: 25px !important;
+        border: 2px solid transparent !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.5px !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 4px 15px rgba(13, 71, 161, 0.3) !important;
+        text-transform: uppercase !important;
+        font-size: 0.95rem !important;
+      }
+
+      .donate-nav-button a:hover {
+        background: linear-gradient(135deg, #0d47a1, #1565c0) !important;
+        color: white !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 20px rgba(13, 71, 161, 0.5) !important;
+        border-color: rgba(255, 255, 255, 0.3) !important;
+      }
+
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.2em;
+        line-height: 1.2;
+        margin-bottom: 25px;
+      }
+
+      .hero-welcome {
+        font-size: 2em;
+        margin-bottom: 12px;
+      }
+
+      .hero-divider {
+        width: 80%;
+        margin-bottom: 20px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .contact-card {
+        padding: 40px 30px;
+      }
+
+      .contact-name {
+        font-size: 1.6rem;
+      }
+
+      .contact-icon {
+        width: 80px;
+        height: 80px;
+      }
+
+      .contact-icon i {
+        font-size: 35px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .contact-container {
+        padding: 40px 15px;
+      }
+
+      .hero-title {
+        font-size: 1.8em;
+        line-height: 1.1;
+        margin-bottom: 20px;
+      }
+
+      .hero-welcome {
+        font-size: 1.6em;
+        margin-bottom: 10px;
+      }
+
+      .hero-divider {
+        width: 90%;
+        margin-bottom: 15px;
+      }
+
+      .contact-card {
+        padding: 30px 20px;
+      }
+
+      .contact-name {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar-one flex">
+    <div class="left flex">
+      <div class="email">
+        <i class="fa fa-envelope"></i>
+        <span> info@iccsfl.com</span>
+      </div>
+      <div class="call">
+        <i class="fa fa-phone"></i>
+        <span> (954) 529-7146</span>
+      </div>
+    </div>
+    <div class="right flex">
+      <i class="fab fa-facebook"></i>
+      <a href="https://www.facebook.com/iccsfl" target="_blank">Facebook</a>
+    </div>
+  </nav>
+
+  <nav class="navbar-two flex" id="main-nav">
+    <div class="logo">
+      <img src="logo.png" alt="ICCS Logo" class="logo-image">
+      <p>Islamic Center of Coral Springs</p>
+    </div>
+    <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-navigation">
+      <i class="fa fa-bars"></i>
+    </button>
+    <ul class="flex nav-links" id="primary-navigation">
+      <li><a href="text.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li class="hide-desktop"><a href="#" onclick="window.location.href='donatepage.html'">Donate</a></li>
+    </ul>
+    <div class="donate-nav-button">
+      <a href="#" onclick="window.location.href='donatepage.html'">Donate</a>
+    </div>
+  </nav>
+
+  <section class="text-section">
+    <div class="contact-container">
+      <div class="hero-welcome">CONTACT</div>
+      <hr class="hero-divider">
+      <div class="hero-title">ISLAMIC CENTER OF CORAL SPRINGS</div>
+
+      <div class="contact-grid">
+        <!-- Left Contact Card -->
+        <div class="contact-card">
+          <div class="contact-icon">
+            <i class="fas fa-user"></i>
+          </div>
+          <h2 class="contact-name">Br. Simo Mansoor</h2>
+          <p class="contact-title-text">Community Leader</p>
+          <div class="contact-details">
+            <div class="contact-item">
+              <i class="fas fa-phone"></i>
+              <a href="tel:954-529-7146">954-529-7146</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Contact Card -->
+        <div class="contact-card">
+          <div class="contact-icon">
+            <i class="fas fa-user"></i>
+          </div>
+          <h2 class="contact-name">Br. Imran Bashir</h2>
+          <p class="contact-title-text">Community Leader</p>
+          <div class="contact-details">
+            <div class="contact-item">
+              <i class="fas fa-phone"></i>
+              <a href="tel:954-479-7040">954-479-7040</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- General Information Section -->
+      <div class="general-info">
+        <h3>General Information</h3>
+        <p><i class="fas fa-envelope"></i> <a href="mailto:info@iccsfl.com">info@iccsfl.com</a></p>
+        <p><i class="fas fa-phone"></i> <a href="tel:954-529-7146">(954) 529-7146</a></p>
+        <p><i class="fas fa-map-marker-alt"></i> 11050 Wiles Rd, Coral Springs, FL 33076</p>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <img src="logo.png" alt="ICCS Logo" class="footer-logo">
+      <p>11050 Wiles Rd, Coral Springs, FL 33076</p>
+      <p>&copy; 2025 Islamic Center of Coral Springs. All rights reserved.</p>
+    </footer>
+  </section>
+
+  <script>
+    // Mobile nav toggle
+    (function(){
+      var nav = document.getElementById('main-nav');
+      var toggle = document.querySelector('.menu-toggle');
+      if (toggle && nav) {
+        toggle.addEventListener('click', function(){
+          var isOpen = nav.classList.toggle('is-open');
+          toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+      }
+    })();
+  </script>
+
+</body>
+
+</html>
+
